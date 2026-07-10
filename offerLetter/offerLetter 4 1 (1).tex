@@ -1,0 +1,174 @@
+\BLOCK{macro esc(s)}\VAR{ s | string | replace('\\', '\\textbackslash ') | replace('{', '\\{') | replace('}', '\\}') | replace('&', '\\&') | replace('%', '\\%') | replace('$', '\\$') | replace('#', '\\#') | replace('_', '\\_') | replace('~', '\\textasciitilde ') | replace('^', '\\textasciicircum ') }\BLOCK{endmacro}
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[a4paper, top=8mm, bottom=14mm, left=18mm, right=18mm, headheight=3.0cm, headsep=8mm, footskip=10mm, includehead, includefoot]{geometry}
+\usepackage{fontspec}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{ragged2e}
+\usepackage{parskip}
+
+\setmainfont{Arial}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\setlength{\tabcolsep}{4pt}
+
+\newcommand{\mpheadercontent}{%
+  \begin{minipage}[t]{0.58\textwidth}
+    \raggedright\vspace{0pt}%
+    {\small ManpowerGroup Services India Pvt. Ltd.}\\[-1pt]
+    {\small Unit No. 4-A/1 \& Unit No. 4-A/2,}\\[-1pt]
+    {\small 4\textsuperscript{th} Floor, Plot No. 6, Uppal Plaza,}\\[-1pt]
+    {\small M-6, Jasola, New Delhi - 110025}\\[4pt]
+    {\small CIN - U74910DL1997PTC085591}\\[4pt]
+    {\small T : +91 - 11 - 6649 7500}\\[-1pt]
+    {\small www.manpowergroup.com.in}
+  \end{minipage}%
+  \hfill
+  \begin{minipage}[t]{0.36\textwidth}
+    \raggedleft\vspace{0pt}%
+    \BLOCK{if logo_path}%
+    \includegraphics[width=2.6cm]{\VAR{logo_path}}%
+    \BLOCK{endif}%
+  \end{minipage}%
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[C]{\mpheadercontent}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\footrulewidth}{0pt}
+
+\newcommand{\offerSignatureBlock}[2]{%
+\noindent\textbf{For ManpowerGroup Services India Pvt Ltd.}
+
+\vspace{0.1cm}
+
+\noindent
+\begin{minipage}[t]{0.45\textwidth}
+  \raggedright\vspace{0pt}
+  \begin{minipage}[t][1.5cm][b]{\linewidth}
+  % \centering
+  #1%
+  \end{minipage}\\[2pt]
+  \rule{4cm}{0.4pt}\\[2pt]
+  Signature\\
+  \textbf{Authorized Signature}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.45\textwidth}
+  \centering\vspace{0pt}
+  \begin{minipage}[t][1.5cm][b]{\linewidth}
+  % \centering
+  #2%
+  \end{minipage}\\[2pt]
+  \rule{4cm}{0.4pt}\\[2pt]
+  Signature\\
+  \textbf{Accepted By}\\
+  \textbf{\VAR{esc(Offer_First_Name)} \VAR{esc(Offer_Mgr_Middle_Name)} \VAR{esc(Offer_Last_Name)}}
+\end{minipage}%
+}
+
+\newcommand{\sealimg}{%
+\BLOCK{if default_signatory_for_letter}%
+\includegraphics[height=2cm,keepaspectratio]{\VAR{default_signatory_for_letter}}%
+\BLOCK{endif}%
+}
+
+\newcommand{\candsigimg}{%
+\BLOCK{if Onb_Mgr_Declaration_Signature}%
+\includegraphics[height=2cm,keepaspectratio]{\VAR{Onb_Mgr_Declaration_Signature}}%
+\BLOCK{endif}%
+}
+
+\begin{document}
+
+
+\hfill\textbf{Dated: \VAR{CURR_DATE}.}
+
+\vspace{0.5cm}
+
+\noindent\textbf{Name: \VAR{esc(Offer_First_Name)} \VAR{esc(Offer_Mgr_Middle_Name)} \VAR{esc(Offer_Last_Name)}}
+
+\vspace{0.3cm}
+
+\noindent\textbf{Subject:} Offer Letter for Fixed Term Contract Assignment
+
+\vspace{0.3cm}
+
+\noindent\textbf{Dear \VAR{esc(Offer_First_Name)} \VAR{esc(Offer_Mgr_Middle_Name)} \VAR{esc(Offer_Last_Name)},}
+
+\vspace{0.3cm}
+
+\noindent With reference to your selection with ManpowerGroup Services India Pvt.\ Ltd.\ for the position of
+\textbf{\VAR{esc(DesignationTitle)}} on a fixed term contract basis, we are pleased to offer you as below.
+
+\vspace{0.4cm}
+\BLOCK{set SalaryItem = breakUpData | selectattr('SalaryHeaderTitle', 'equalto', 'Offered CTC') | first | default({'column1Value': ''}, true)}%
+\noindent
+\begin{tabular}{@{}p{5.2cm}p{1cm}l@{}}
+  \textbf{Start date of Assignment} & \textbf{:} & \textbf{\VAR{Offer_Contract_Start_Date}} \\[9pt]
+  \textbf{End date of Assignment}   & \textbf{:} & \textbf{\VAR{Offer_Contract_End_Date}}   \\[9pt]
+  \textbf{Monthly CTC Salary}       & \textbf{:} & \textbf{Rs.\ \ \VAR{SalaryItem.column1Value}/-} \\[9pt]
+  \textbf{Notice Period}            & \textbf{:} & \textbf{\VAR{Offer_Contract_Notice_Period} Days}              \\
+\end{tabular}
+
+\vspace{0.3cm}
+
+\noindent Any statutory dues like PF, ESI, Bonus etc., if applicable, will be Paid / Deducted as per law. All taxes
+will be deducted as applicable by law.
+
+\vspace{0.3cm}
+
+\noindent Appointment letter and other terms and conditions of the contract would be provided after your first
+salary processed with Manpower.
+
+\vspace{0.3cm}
+
+\noindent Kindly send the signed and accepted duplicate copy of the offer letter within 7 days, failing which it
+will be treated that this offer stands withdrawn automatically.
+
+\vspace{0.3cm}
+
+\offerSignatureBlock{\sealimg}{\candsigimg}
+
+\newpage
+
+
+\vspace*{0.3cm}
+
+\renewcommand{\arraystretch}{1.3}
+
+\noindent
+\begin{longtable}{|>{\raggedright\arraybackslash}p{8.2cm}|>{\raggedleft\arraybackslash}p{8.2cm}|}
+  \hline
+  Client Name & \multicolumn{1}{>{\raggedright\arraybackslash}p{8.2cm}|}{\VAR{esc(Client_Name)}} \\
+  \hline
+  Candidate & \multicolumn{1}{>{\raggedright\arraybackslash}p{8.2cm}|}{\VAR{esc(Offer_First_Name)} \VAR{esc(Offer_Mgr_Middle_Name)} \VAR{esc(Offer_Last_Name)}} \\
+  \hline
+  Designation & \multicolumn{1}{>{\raggedright\arraybackslash}p{8.2cm}|}{\VAR{esc(DesignationTitle)}} \\
+  \hline
+  Start date of Assignment & \multicolumn{1}{>{\raggedright\arraybackslash}p{8.2cm}|}{\textbf{\VAR{Offer_Contract_Start_Date}}} \\
+  \hline
+  End date of Assignment & \multicolumn{1}{>{\raggedright\arraybackslash}p{8.2cm}|}{\textbf{\VAR{Offer_Contract_End_Date}}} \\
+  \hline
+  State & \multicolumn{1}{>{\raggedright\arraybackslash}p{8.2cm}|}{\VAR{esc(Offered_Location_State)}} \\
+  \hline
+  \BLOCK{for item in breakUpData}
+\BLOCK{if item.column1Value != 'NaN' and item.column1Value != '0'}
+\BLOCK{if item.SalaryHeaderTitle in ['Take Home Salary', 'Offered CTC', 'Gross Salary']}\textbf{\VAR{item.SalaryHeaderTitle}} & \textbf{\VAR{esc(item.column1Value)}}\BLOCK{else}\VAR{esc(item.SalaryHeaderTitle)} &\VAR{esc(item.column1Value)}\BLOCK{endif} \\
+\hline
+\BLOCK{endif}
+\BLOCK{endfor}
+\end{longtable}
+
+\vspace{0.6cm}
+
+\offerSignatureBlock{\sealimg}{\candsigimg}
+
+\end{document}
