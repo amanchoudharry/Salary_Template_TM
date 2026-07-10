@@ -33,7 +33,7 @@
   \begin{minipage}[t]{0.36\textwidth}
     \raggedleft\vspace{0pt}%
     \BLOCK{if logo_path}%
-    \includegraphics[width=2.6cm]{\VAR{logo_path}}%
+    \includegraphics[width=4.8cm]{\VAR{logo_path}}%
     \BLOCK{endif}%
   \end{minipage}%
 }
@@ -177,7 +177,7 @@ A detailed appointment letter would be issued to you upon your joining.
   \small\textbf{Salary Components} & & \small\textbf{Monthly Amount(Rs.)} & \small\textbf{Annually Amount(Rs.)} \\
   \hline
   \BLOCK{for item in EarningHeadersTable}
-  \BLOCK{if item.column1Value != '0' and item.column2Value != '0'}
+  \BLOCK{if item.column1Value != 'NaN' and item.column1Value != '0'}
   \VAR{item.SalaryHeaderTitle} & \BLOCK{if item.rate is defined}\VAR{item.rate}\%\BLOCK{endif} & \VAR{item.column1Value} & \VAR{item.column2Value} \\
   \hline
   \BLOCK{endif}
@@ -188,7 +188,7 @@ A detailed appointment letter would be issued to you upon your joining.
   \textbf{For Employee} & & & \\
   \hline
   \BLOCK{for item in DeductionHeadersTable}
-  \BLOCK{if item.column1Value != '0' and item.column2Value != '0'}
+  \BLOCK{if item.column1Value != 'NaN' and item.column1Value != '0'}
   \VAR{item.SalaryHeaderTitle} & \BLOCK{if item.rate is defined}\VAR{item.rate}\%\BLOCK{endif} & \VAR{item.column1Value} & \VAR{item.column2Value} \\
   \hline
   \BLOCK{endif}

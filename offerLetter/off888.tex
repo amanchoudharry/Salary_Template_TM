@@ -68,7 +68,8 @@
  }%
 \includegraphics[height=1.6cm,keepaspectratio]{\VAR{Onb_Mgr_Declaration_Signature
  }}%
-
+\BLOCK{else}%
+\textbf{Offer\_Accepted\_Signature}%
 \BLOCK{endif}%
 }
 
@@ -99,7 +100,7 @@
 
 \noindent\textbf{Subject: Offer Letter for Fixed Term Contract assignment}
 
-\noindent\textbf{Location: \expandafter\MakeUppercase\VAR{Offered_Location_City}}
+\noindent\textbf{Location: \VAR{Offered_Location_City}}
 
 \vspace{0.3cm}
 
@@ -113,7 +114,7 @@ Congratulations on your new assignment with \textbf{\VAR{Client_Name}
 \vspace{0.2cm}
 
 With reference to your interview with us, we take pleasure in offering you the position of
-\textbf{\VAR{DesignationTitle}} in this regard, you will be based at \textbf{\MakeUppercase{\VAR{Offered_Location_City}},} and you will be
+\textbf{\VAR{DesignationTitle}} in this regard, you will be based at \textbf{\VAR{Offered_Location_City},} and you will be
 assigned to \textbf{\VAR{Client_Name}
  }
 
@@ -190,7 +191,7 @@ documents mentioned in this letter.
   \textbf{\underline{for Employee}} &  \\
   \hline
   \BLOCK{for item in DeductionHeadersTable}
- \BLOCK{if item.column1Value != 'NaN' and item.column1Value != '0'}
+  \BLOCK{if item.column1Value != 'NaN' and item.column1Value != '0'}
   \VAR{item.SalaryHeaderTitle} & \VAR{item.column1Value} \\
   \hline
   \BLOCK{endif}

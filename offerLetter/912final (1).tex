@@ -37,7 +37,7 @@
   \begin{minipage}[t]{0.30\textwidth}
     \raggedleft\vspace{0pt}%
     \BLOCK{if logo_path}%
-    \includegraphics[width=2.6cm]{\VAR{logo_path}}%
+    \includegraphics[width=4.8cm]{\VAR{logo_path}}%
     \BLOCK{endif}%
   \end{minipage}%
 }
@@ -159,7 +159,7 @@ reserve their right to treat this offer as withdrawn automatically without furth
   & \VAR{OfferedLocationTitle} \\
   \hline
   \BLOCK{for item in EarningHeadersTable}
-  \BLOCK{if item.column1Value != '0' and item.column1Value != 'NaN'}
+  \BLOCK{if item.column1Value != 'NaN' and item.column1Value != '0'}
   \VAR{item.SalaryHeaderTitle} & \VAR{item.column1Value} \\
   \hline
   \BLOCK{endif}
@@ -171,7 +171,7 @@ reserve their right to treat this offer as withdrawn automatically without furth
   \textbf{\underline{for Employee}} &  \\
   \hline
   \BLOCK{for item in DeductionHeadersTable}
-  \BLOCK{if item.column1Value != '0' and item.column1Value != 'NaN'}
+  \BLOCK{if item.column1Value != 'NaN' and item.column1Value != '0'}
   \VAR{item.SalaryHeaderTitle} & \VAR{item.column1Value} \\
   \hline
   \BLOCK{endif}

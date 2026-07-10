@@ -1,0 +1,212 @@
+\documentclass[11pt,letterpaper]{article}
+
+
+
+\usepackage[a4paper, top=8mm, bottom=14mm, left=18mm, right=18mm, headheight=4.0cm, headsep=8mm, footskip=10mm, includehead, includefoot]{geometry}
+\usepackage{fontspec}
+\usepackage[table]{xcolor}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{ragged2e}
+\usepackage{parskip}
+
+\setmainfont{Arial}          % metric-compatible substitute for Calibri
+
+% \definecolor{mpgrey}{HTML}{808080}
+% \definecolor{ctcshade}{HTML}{FFF5CE}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\setlength{\tabcolsep}{4pt}
+
+\newcommand{\mpheadercontent}{%
+  \begin{minipage}[t]{0.58\textwidth}
+    \raggedright\vspace{0pt}%
+    {\small ManpowerGroup Services India Pvt. Ltd.}\\[-1pt]
+    {\small Gee Gee Universal, 5\textsuperscript{th} Floor,}\\[-1pt]
+    {\small No.2, Mc Nicholas Road,}\\[-1pt]
+    {\small Chetpet, Chennai - 600031}\\[4pt]
+    {\small CIN - U74910DL1997PTC085591}\\[4pt]
+    {\small T : +91 - 44 - 66809610}\\[-1pt]
+    {\small www.manpowergroup.co.in}
+  \end{minipage}%
+  \hfill
+  \begin{minipage}[t]{0.36\textwidth}
+    \raggedleft\vspace{0pt}%
+    \BLOCK{if logo_path}%
+    \includegraphics[width=4.8cm]{\VAR{logo_path}}%
+    \BLOCK{endif}%
+  \end{minipage}%
+}
+
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[C]{\mpheadercontent}
+\renewcommand{\headrulewidth}{0pt}
+% \fancyfoot[C]{\makebox[\textwidth]{\includegraphics[width=\paperwidth]{footer.png}}}
+% \renewcommand{\footrulewidth}{0pt}
+
+\newcommand{\offerSignatureBlock}[2]{%
+
+\vspace{0.1cm}
+\noindent
+
+\begin{minipage}[t]{0.45\textwidth}
+  \raggedright\vspace{0pt}
+  \begin{minipage}[t][1.3cm][b]{\linewidth}
+  #1%
+  \end{minipage}\\[2pt]
+  Signature\\
+  \textbf{Authorised Signatory}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.45\textwidth}
+  \raggedleft\vspace{0pt}
+  \begin{minipage}[t][1.3cm][b]{\linewidth}
+  \raggedleft#2%
+  \end{minipage}\\[2pt]
+  Signature\\
+  \textbf{Accepted By}\\
+  \textbf{\VAR{Offer_First_Name} \VAR{Offer_Mgr_Middle_Name} \VAR{Offer_Last_Name}}
+\end{minipage}%
+}
+
+
+\newcommand{\sealimg}{%
+\BLOCK{if default_signatory_for_letter}%
+\includegraphics[height=1.6cm,keepaspectratio]{\VAR{default_signatory_for_letter}}%
+\BLOCK{endif}%
+}
+
+\newcommand{\candsigimg}{%
+\BLOCK{if Onb_Mgr_Declaration_Signature}%
+\includegraphics[height=1.1cm,keepaspectratio]{\VAR{Onb_Mgr_Declaration_Signature}}%
+\BLOCK{endif}%
+}
+
+\begin{document}
+
+\noindent\textbf{\VAR{CURR_DATE}}
+
+\vspace{0.5cm}
+
+\noindent\textbf{\VAR{Offer_First_Name} \VAR{Offer_Mgr_Middle_Name} \VAR{Offer_Last_Name},}
+
+\noindent\textbf{\VAR{OfferedLocationTitle}}
+
+\vspace{0.3cm}
+
+\noindent\textbf{Dear \VAR{Offer_First_Name} \VAR{Offer_Mgr_Middle_Name} \VAR{Offer_Last_Name},}
+
+\vspace{0.2cm}
+
+With reference to your appointment with \textbf{Manpower Group Services India Pvt. Ltd}., we have
+pleasure in offering you the position of \textbf{\VAR{DesignationTitle}} in our organization on a contract
+basis. The detail of the offer is as follow:
+
+\vspace{0.3cm}
+
+\begin{center}
+\BLOCK{set TakeHomeItem = breakUpData | selectattr('SalaryHeaderTitle', 'equalto', 'Take Home Salary') | first}%
+ 
+\begin{tabular}{@{}p{5.0cm}p{0.4cm}l@{}}
+  Start date of Assignment & \textbf{:} & \textbf{\VAR{Offer_Contract_Start_Date}} \\[6pt]
+  End date of Assignment   & \textbf{:} & \textbf{\VAR{Offer_Contract_End_Date}} \\[6pt]
+  Client                    & \textbf{:} & \textbf{\VAR{Client_Name}} \\[6pt]
+  Monthly NTH               & \textbf{:} & \textbf{INR \VAR{TakeHomeItem.column1Value}~/-} \\
+\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+
+Any statutory dues like PF, ESI, Bonus etc, if applicable, will be Paid / Deducted as per law. All taxes
+will be deducted as applicable by law.
+
+You will be insured under the Company's Group Medical Insurance scheme, which provides accident
+cover of Rs.2,00,000 and medical cover of Rs.1,00,000; subject to terms contained in the policy.
+Details of how to avail of these benefits and other benefits are detailed in your Field staff Handbook
+which will be issued to you.
+
+In addition, you are eligible for leave as per the leave policy of the company.
+
+All other terms and conditions of the contract and the details of your salary break up are specified in
+Service Contract attached hereto.
+
+Temporary Staff agrees to provide Manpower with notice for termination or pay salary in lieu of notice
+should the Temporary Staff decide to end an Assignment earlier than the agreed duration. The notice
+period for termination shall be 30 Days.
+
+\textbf{"This offer is subject to the clearance of your background verification within 30 days of this
+offer/joining. In case any credentials are found to be incorrect, the employment contract would be
+terminated". Covid vaccination is mandatory.}
+
+\vspace{0.15cm}
+\noindent *The Name in system might change as per compliance.
+
+\vspace{0.5cm}
+
+\offerSignatureBlock{\sealimg}{\candsigimg}
+
+\newpage
+
+\begin{center}
+  {\underline{\textbf{CTC Breakup}}}
+\end{center}
+
+\vspace{0.3cm}
+
+
+\renewcommand{\arraystretch}{1.25}
+\BLOCK{set TotalItem = breakUpData | selectattr('SalaryHeaderTitle', 'equalto', 'Offered CTC') | first}%
+\BLOCK{set TakeHomeItem = breakUpData | selectattr('SalaryHeaderTitle', 'equalto', 'Take Home Salary') | first}%
+
+\begin{center}
+\begin{tabular}{|p{8.5cm}|>{\raggedleft\arraybackslash}p{6.5cm}|}
+\hline
+\multicolumn{1}{|c|}{\textbf{\VAR{OfferedLocationTitle}}} & \multicolumn{1}{c|}{\textbf{New Structure}} \\
+\hline
+\textbf{\underline{Particulars}} & \multicolumn{1}{c|}{\textbf{\underline{Amount (Rs.)}}} \\
+\hline
+\BLOCK{for item in EarningHeadersTable}
+\BLOCK{if item.column1Value != 'NaN' and item.column1Value != '0'}
+\VAR{item.SalaryHeaderTitle} & \VAR{item.column1Value} \\
+\hline
+\BLOCK{endif}
+\BLOCK{endfor}
+\cellcolor{yellow!60}\textbf{Total CTC} & \cellcolor{yellow!60}\textbf{\VAR{TotalItem.column1Value}} \\
+\hline
+\textbf{\underline{for Employee}} & \\
+\hline
+\BLOCK{for item in DeductionHeadersTable}
+\BLOCK{if item.column1Value != 'NaN' and item.column1Value != '0'}
+\VAR{item.SalaryHeaderTitle} & \VAR{item.column1Value} \\
+\hline
+\BLOCK{endif}
+\BLOCK{endfor}
+\cellcolor{yellow!60}\textbf{TAKE HOME} & \cellcolor{yellow!60}\textbf{\VAR{TakeHomeItem.column1Value}} \\
+\hline
+\end{tabular}
+\end{center}
+
+
+\vspace{1.2cm}
+
+\noindent
+\hfill
+\hspace*{0.4cm}
+\begin{minipage}[t]{0.45\textwidth}
+  \raggedleft\vspace{0pt}
+  \begin{minipage}[t][1.3cm][b]{\linewidth}
+  \raggedleft\candsigimg%
+  \end{minipage}\\[2pt]
+  Signature\\
+  \textbf{Accepted By}\\
+  \textbf{\VAR{Offer_First_Name} \VAR{Offer_Mgr_Middle_Name} \VAR{Offer_Last_Name}}
+\end{minipage}%
+\hspace*{2cm}
+
+\end{document}
+ 
